@@ -55,8 +55,35 @@ margin-left: 20px;
 }
 
 /* index styles */
+.blogs a{
+    display: block;
+    margin: 40px 0;
+    padding-left: 30px;
+    border-left: 6px solid crimson;
+}
+
+.blogs a:hover{
+    color: crimson;
+}
+
 
 /* details styles */
+.details{
+    position: relative;
+}
+
+.del{
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.del:hover{
+    cursor: pointer;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2)
+}
 
 /* create styles */
 .create-blog form{

@@ -22,6 +22,8 @@ app.set('view engine', 'ejs')
 
 // middleware & static files
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 app.use(morgan('dev'))
 
 
@@ -49,9 +51,47 @@ app.get('/blogs', (req, res) => {
         })
 })
 
+app.post('/blogs', (req, res) => {
+    const blog = new Blog(req.body)
+    blog.save()
+        .then((result) => {
+            res.redirect('/blogs')
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+})
+
 app.get('/blogs/create', (req, res) => {
     res.render('create', { title: 'Create a New Blog' })
 })
+
+app.get('/blogs/:id', (req, res) => {
+    const id = req.params.id
+    Blog.findById(id)
+        .then(result => {
+            res.render('details', { blog: result , title: 'Blog Details' })
+        })
+        .catch((err) => console.log(err))
+})
+
+app.post('/delete/:id', (req, res) => {
+    Blog.findByIdAndDelete(req.params.id)
+        .then(() => {
+            res.redirect("/blogs")
+        })
+        .catch((err) => console.log(err))
+})
+
+// app.delete('blogs/:id', (req, res) => {
+//     const id = req.params.id
+//     console.log("In app.delete")
+//     Blog.findByIdAndDelete(id)
+//     .then((result) => {
+//         res.json({ redirect: '/blogs' })
+//     })
+//     .catch((err) => console.log(err))
+// })
 
 // 404 page
 app.use((req, res) => {

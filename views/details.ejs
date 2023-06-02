@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("./partials/head.ejs")  %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <div class="details content">
+        <h2><%= blog.title %></h2>
+        <div class="content">
+            <p><%= blog.body %></p>
+        </div>
+        <form action="/delete/<%= blog._id %>" method='POST' class="del">
+            <button type="submit">DELETE</button>
+        </form>
+    </div>
+    <%- include('./partials/footer.ejs') %>
+
+    <script>
+        // const trashcan = document.querySelector('a.delete')
+
+        // trashcan.addEventListener('click', (e) => {
+        //     const endpoint = `/blogs/${trashcan.dataset.doc}`
+        //     console.log(endpoint)
+        //     fetch(endpoint, {
+        //         method: 'DELETE'
+        //     })
+        //     .then((response) => {
+        //         return response.json()
+        //     })
+        //     .then((data) => window.location.href = data.redirect)
+        //     .catch((err) => console.log(err))
+        // })
+    </script>
+
+</body>
+</html>
